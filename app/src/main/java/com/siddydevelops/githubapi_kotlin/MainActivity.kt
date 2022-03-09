@@ -1,6 +1,5 @@
 package com.siddydevelops.githubapi_kotlin
 
-import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -33,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                 if(response.body() != null) {
                     Log.d(TAG, "data: ${response.body()}")
                     for(item: GithubDetailModel in response.body()!!) {
-                        Log.d(TAG, "Item: ${item.id}")
+                        Log.d(TAG, "Item: ${item.forks}")
                     }
                     val adapter = RVAdapter(response.body()!!)
                     recyclerView.adapter = adapter
