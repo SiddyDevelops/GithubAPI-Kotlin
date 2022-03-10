@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.siddydevelops.githubapi_kotlin.ApiInterfaces.ApiInterface
@@ -49,20 +50,26 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         }) */
 
         // Fetching data from API using COROUTINES
-        launch(Dispatchers.Main) {
+        lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val response = ApiInterface.create().getCoroutineGithubData()
                 if(response.isSuccessful && response.body() != null) {
                     val apiList = response.body()!!
-                    val adapter = RVAdapter(apiList)
-                    recyclerView.adapter = adapter
-                    progressBar.visibility = View.INVISIBLE
+                    withContext(Dispatchers.Main) {
+                        val adapter = RVAdapter(apiList)
+                        recyclerView.adapter = adapter
+                        progressBar.visibility = View.INVISIBLE
+                    }
                 } else {
                     Log.d(TAG,"ERROR: ${response.message()}")
-                    Toast.makeText(this@MainActivity,"Error Occurred: ${response.message()}",Toast.LENGTH_SHORT).show()
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@MainActivity,"Error Occurred: ${response.message()}",Toast.LENGTH_SHORT).show()
+                    }
                 }
             } catch(e: Exception) {
-                Toast.makeText(this@MainActivity,"Error Occurred: ${e.message}",Toast.LENGTH_SHORT).show()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@MainActivity,"Error Occurred: ${e.message}",Toast.LENGTH_SHORT).show()
+                }
                 Log.d(TAG,"ERROR: ${e.message}")
             }
         }
