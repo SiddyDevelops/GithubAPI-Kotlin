@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GithubAPIKotlin">
         <activity
+            android:name=".NewActivity"
+            android:exported="false" />
+        <activity
             android:name=".GithubDetailActivity"
             android:exported="false" />
         <activity
