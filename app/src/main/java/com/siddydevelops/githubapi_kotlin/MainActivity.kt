@@ -43,25 +43,25 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
         // WORKING --> Log.d(TAG, viewModel.getGithubItemsInList().toString())
 
-        viewModel?.getError()?.observe(this, Observer { error->
-            if(error) {
+        viewModel?.getError()?.observe(this, Observer {
+            if(it) {
                 Toast.makeText(this, "An error has occurred while downloading data. Please try again.", Toast.LENGTH_SHORT).show()
             }
         })
 
-        viewModel?.getLoading()?.observe(this, Observer { isLoading->
-            if(isLoading) {
+        viewModel?.getLoading()?.observe(this, Observer {
+            if(it) {
                 progressBar.visibility = View.VISIBLE
             } else {
                 progressBar.visibility = View.GONE
             }
         })
 
-        viewModel?.getGithubItemsInList()?.observe(this, Observer { githubItems->
-            Log.d(TAG, githubItems.toString())
-            Log.d(TAG, githubItems[5].name)
+        viewModel?.getGithubItemsInList()?.observe(this, Observer {
+            Log.d(TAG, it.toString())
+            Log.d(TAG, it[5].name)
 
-            val adapter = RVAdapter(githubItems)
+            val adapter = RVAdapter(it)
             recyclerView.adapter = adapter
 
         })
