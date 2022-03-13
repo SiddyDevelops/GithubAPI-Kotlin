@@ -1,6 +1,8 @@
 package com.siddydevelops.githubapi_kotlin.viewModels
 
 import android.util.Log
+import android.view.View
+import androidx.databinding.BindingAdapter
 import androidx.lifecycle.*
 import com.siddydevelops.githubapi_kotlin.apiInterfaces.ApiInterface
 import com.siddydevelops.githubapi_kotlin.apiModel.GithubDetailModel
