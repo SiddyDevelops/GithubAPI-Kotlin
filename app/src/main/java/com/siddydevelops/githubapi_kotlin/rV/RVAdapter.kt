@@ -45,8 +45,6 @@ class RVAdapter(private var githubList: List<GithubDetailModel>) : RecyclerView.
         fun bind(item: GithubDetailModel) {
             binding.githubItem = item
         }
-//        var repoName: TextView = itemView.findViewById(R.id.repoName)
-//        val repoDescription: TextView = itemView.findViewById(R.id.repoDescription)
 
     }
 
