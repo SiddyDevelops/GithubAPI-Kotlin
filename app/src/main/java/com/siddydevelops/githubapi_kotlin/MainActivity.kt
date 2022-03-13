@@ -16,7 +16,6 @@ import com.siddydevelops.githubapi_kotlin.ApiInterfaces.ApiInterface
 import com.siddydevelops.githubapi_kotlin.ApiModel.GithubDetailModel
 import com.siddydevelops.githubapi_kotlin.RV.RVAdapter
 import com.siddydevelops.githubapi_kotlin.ViewModels.GithubViewModel
-import com.siddydevelops.githubapi_kotlin.databinding.ActivityMainBinding
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,8 +23,9 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity(), CoroutineScope by MainScope(), LifecycleOwner {
     private val TAG = "MainActivity"
-    private lateinit var binding: ActivityMainBinding
+    //private lateinit var binding: ActivityMainBinding
     private var viewModel:GithubViewModel? = null
+    lateinit var adapter: RVAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +35,10 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope(), Lifecyc
         val recyclerView: RecyclerView = findViewById(R.id.recyclerViewMain)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        adapter = RVAdapter(listOf())
+        recyclerView.adapter = adapter
+
+        //binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         viewModel = ViewModelProvider(this).get(GithubViewModel::class.java)
 
@@ -57,8 +60,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope(), Lifecyc
             Log.d(TAG, it.toString())
             Log.d(TAG, it[5].name)
 
-            val adapter = RVAdapter(it)
-            recyclerView.adapter = adapter
+            adapter.setGithubItems(it)
 
         })
 

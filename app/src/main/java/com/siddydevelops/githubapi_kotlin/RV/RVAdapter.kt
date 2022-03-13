@@ -1,6 +1,7 @@
 package com.siddydevelops.githubapi_kotlin.RV
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,6 +38,7 @@ class RVAdapter(private var githubList: List<GithubDetailModel>) : RecyclerView.
     }
 
     fun setGithubItems(githubItemList: List<GithubDetailModel>) {
+        Log.d("DATA->", githubItemList.toString())
         this.githubList = githubItemList.toMutableList()
         notifyDataSetChanged()
     }
