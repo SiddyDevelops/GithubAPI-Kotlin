@@ -11,7 +11,7 @@ import com.siddydevelops.githubapi_kotlin.GithubDetailActivity
 import com.siddydevelops.githubapi_kotlin.IntentProviders
 import com.siddydevelops.githubapi_kotlin.R
 
-class RVAdapter(private val githubList: List<GithubDetailModel>) : RecyclerView.Adapter<RVAdapter.ViewHolder>() {
+class RVAdapter(private var githubList: List<GithubDetailModel>) : RecyclerView.Adapter<RVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RVAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.github_layout_item,parent,false)
@@ -34,6 +34,11 @@ class RVAdapter(private val githubList: List<GithubDetailModel>) : RecyclerView.
 
     override fun getItemCount(): Int {
         return githubList.size
+    }
+
+    fun setGithubItems(githubItemList: List<GithubDetailModel>) {
+        this.githubList = githubItemList.toMutableList()
+        notifyDataSetChanged()
     }
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {

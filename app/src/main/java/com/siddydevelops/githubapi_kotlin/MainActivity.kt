@@ -9,9 +9,7 @@ import android.view.View
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.siddydevelops.githubapi_kotlin.ApiInterfaces.ApiInterface
@@ -24,7 +22,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
+class MainActivity : AppCompatActivity(), CoroutineScope by MainScope(), LifecycleOwner {
     private val TAG = "MainActivity"
     private lateinit var binding: ActivityMainBinding
     private var viewModel:GithubViewModel? = null
@@ -40,8 +38,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         viewModel = ViewModelProvider(this).get(GithubViewModel::class.java)
-
-        // WORKING --> Log.d(TAG, viewModel.getGithubItemsInList().toString())
 
         viewModel?.getError()?.observe(this, Observer {
             if(it) {
