@@ -1,4 +1,4 @@
-package com.siddydevelops.githubapi_kotlin.ApiModel
+package com.siddydevelops.githubapi_kotlin.apiModel
 
 data class GithubDetailModel (
     val id: Int,

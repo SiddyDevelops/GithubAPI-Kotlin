@@ -1,9 +1,9 @@
-package com.siddydevelops.githubapi_kotlin.ViewModels
+package com.siddydevelops.githubapi_kotlin.viewModels
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.siddydevelops.githubapi_kotlin.ApiInterfaces.ApiInterface
-import com.siddydevelops.githubapi_kotlin.ApiModel.GithubDetailModel
+import com.siddydevelops.githubapi_kotlin.apiInterfaces.ApiInterface
+import com.siddydevelops.githubapi_kotlin.apiModel.GithubDetailModel
 import kotlinx.coroutines.launch
 
 class GithubViewModel : ViewModel() {

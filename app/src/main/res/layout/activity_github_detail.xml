@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="RepoName"
+                android:text="Repo Name"
                 android:textColor="#303030"
                 android:textSize="22sp"
                 android:textStyle="bold|italic" />
@@ -73,17 +73,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="No. of Forks: "
-                    android:textSize="15sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/repoForks"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="256"
-                    android:id="@+id/repoForks"
-                    android:textSize="15sp"
-                    android:textColor="@color/black"/>
+                    android:text="250"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
@@ -98,23 +98,22 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="No. of Watchers: "
-                    android:textSize="15sp"
-                    android:textColor="@color/black"/>
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/repoWatchers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/repoWatchers"
                     android:layout_marginStart="8dp"
-                    android:text="256"
-                    android:textSize="15sp"
                     android:layout_marginBottom="10dp"
-                    android:textColor="@color/black"/>
+                    android:text="55"
+                    android:textColor="@color/black"
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
-
 
     </androidx.cardview.widget.CardView>
 

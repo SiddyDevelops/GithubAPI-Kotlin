@@ -1,44 +1,33 @@
 package com.siddydevelops.githubapi_kotlin
 
-import android.app.Activity
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.siddydevelops.githubapi_kotlin.ApiInterfaces.ApiInterface
-import com.siddydevelops.githubapi_kotlin.ApiModel.GithubDetailModel
-import com.siddydevelops.githubapi_kotlin.RV.RVAdapter
-import com.siddydevelops.githubapi_kotlin.ViewModels.GithubViewModel
+import com.siddydevelops.githubapi_kotlin.rV.RVAdapter
+import com.siddydevelops.githubapi_kotlin.viewModels.GithubViewModel
+import com.siddydevelops.githubapi_kotlin.databinding.ActivityMainBinding
 import kotlinx.coroutines.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class MainActivity : AppCompatActivity(), CoroutineScope by MainScope(), LifecycleOwner {
     private val TAG = "MainActivity"
-    //private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
+
     private var viewModel:GithubViewModel? = null
-    lateinit var adapter: RVAdapter
+    private lateinit var adapter: RVAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val progressBar: ProgressBar = findViewById(R.id.progressBar)
-        val recyclerView: RecyclerView = findViewById(R.id.recyclerViewMain)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerViewMain.layoutManager = LinearLayoutManager(this)
 
         adapter = RVAdapter(listOf())
-        recyclerView.adapter = adapter
-
-        //binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding.recyclerViewMain.adapter = adapter
 
         viewModel = ViewModelProvider(this).get(GithubViewModel::class.java)
 
@@ -50,15 +39,14 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope(), Lifecyc
 
         viewModel?.getLoading()?.observe(this, Observer {
             if(it) {
-                progressBar.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.VISIBLE
             } else {
-                progressBar.visibility = View.GONE
+                binding.progressBar.visibility = View.GONE
             }
         })
 
         viewModel?.getGithubItemsInList()?.observe(this, Observer {
             Log.d(TAG, it.toString())
-            Log.d(TAG, it[5].name)
 
             adapter.setGithubItems(it)
 

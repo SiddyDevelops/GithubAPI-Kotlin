@@ -1,7 +1,7 @@
-package com.siddydevelops.githubapi_kotlin.ApiInterfaces
+package com.siddydevelops.githubapi_kotlin.apiInterfaces
 
 
-import com.siddydevelops.githubapi_kotlin.ApiModel.GithubDetailModel
+import com.siddydevelops.githubapi_kotlin.apiModel.GithubDetailModel
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
