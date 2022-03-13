@@ -1,9 +1,12 @@
 package com.siddydevelops.githubapi_kotlin.rV
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.siddydevelops.githubapi_kotlin.GithubDetailActivity
+import com.siddydevelops.githubapi_kotlin.IntentProviders
 import com.siddydevelops.githubapi_kotlin.apiModel.GithubDetailModel
 import com.siddydevelops.githubapi_kotlin.databinding.GithubLayoutItemBinding
 
@@ -19,16 +22,14 @@ class RVAdapter(private var githubList: List<GithubDetailModel>) : RecyclerView.
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val githubItem = githubList[position]
         holder.bind(githubItem)
-//        holder.repoName.text = githubItem.name
-//        holder.repoDescription.text = githubItem.description
-//        holder.itemView.setOnClickListener{
-//            val intent = Intent(holder.itemView.context,GithubDetailActivity::class.java)
-//            intent.putExtra(IntentProviders.REPO_NAME,githubItem.name)
-//            intent.putExtra(IntentProviders.REPO_DESC,githubItem.description)
-//            intent.putExtra(IntentProviders.REPO_FORKS,githubItem.forks)
-//            intent.putExtra(IntentProviders.REPO_WATCHERS,githubItem.watchers)
-//            holder.itemView.context.startActivity(intent)
-//        }
+        holder.itemView.setOnClickListener{
+            val intent = Intent(holder.itemView.context, GithubDetailActivity::class.java)
+            intent.putExtra(IntentProviders.REPO_NAME,githubItem.name)
+            intent.putExtra(IntentProviders.REPO_DESC,githubItem.description)
+            intent.putExtra(IntentProviders.REPO_FORKS,githubItem.forks)
+            intent.putExtra(IntentProviders.REPO_WATCHERS,githubItem.watchers)
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {
